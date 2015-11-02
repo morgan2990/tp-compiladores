@@ -1,0 +1,15 @@
+start
+	entero a = 1;
+	entero b = 1;
+	entero c = a + b;
+	texto t = "hola";
+	ciclo (entero i = 1; i<5; i++){
+		c = c + a;
+	}
+	si (c < 4){
+		b = 2;
+	}
+	sino{
+		c = 0;
+	}
+end
