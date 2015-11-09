@@ -4,7 +4,7 @@
 
 %{
 #include <stdio.h>
-#include <tp.tab.h>
+#include "tp.tab.h"
 %}
 
 OP_SUMA "+"
@@ -23,36 +23,34 @@ VAR_TYPE [A-Z][a-zA-Z0-9]*
 %%
 
 
-"start"				{ printf("START"); return START}
-"end"				{ printf("END"); return END}
-"("                 { printf("PA \n"); PA;}
-")"                 { printf("PC \n"); PC;}
-"{"                 { printf("LLA \n"); LLA;}
-"}"                 { printf("LLC \n"); LLC;}
-"ciclo"	    		{ printf("CICLO \n"); CICLO;}
-"si"			    { printf("CONDICION \n"); CONDICION;}
-"sino"			    { printf("SINO \n"); SINO;}
+"start"				{ printf("START"); return START;}
+"end"				{ printf("END"); return END;}
+"("                 { printf("PA \n"); return PA;}
+")"                 { printf("PC \n"); return PC;}
+"{"                 { printf("LLA \n"); return LLA;}
+"}"                 { printf("LLC \n"); return LLC;}
+"ciclo"	    		{ printf("CICLO \n"); return CICLO;}
+"si"			    { printf("CONDICION \n"); return CONDICION;}
+"sino"			    { printf("SINO \n"); return SINO;}
 "="					{ printf("ASIGNACION \n"); return ASIGNACION;}
 ";"					{ printf("FINDELINEA \n"); return FIN_LINEA;}
-{OP_SUMA}          	{ printf("SUMA \n"); OP_SUMA}
-{OP_RESTA}          { printf("RESTA \n"); OP_RESTA}
-{OP_PROD}          	{ printf("MULTIPLICACION \n"); return OP_MULT}
+{OP_SUMA}          	{ printf("SUMA \n"); return OP_SUMA;}
+{OP_RESTA}          { printf("RESTA \n"); return OP_RESTA;}
+{OP_PROD}          	{ printf("MULTIPLICACION \n"); return OP_PROD;}
 {OP_DIV}			{ printf("DIVISION \n"); return OP_DIV;}
-{BOOLEAN}           { printf("BOOLEANO \n"); yylval.simbolo = yytext; return BOOLEAN;}
+{BOOLEAN}           { printf("BOOLEANO \n"); yylval.simbolo = yyleng; return BOOLEAN;}
 {STRING}		    { printf("STRING \n");strcpy(yylval.cadena, yytext); return STRING;}
 {DIGIT}            	{ printf("DIGIT \n"); yylval.numero=atoi(yytext); return DIGIT;}
 {INTEGER}           { printf("INTEGER \n"); yylval.numero=atoi(yytext); return INTEGER;}
-{OP_LOGIC}       	{ printf("OPERADOR LOGICO \n"); yylval.simbolo = yytext; return OP_LOGIC;}
+{OP_LOGIC}       	{ printf("OPERADOR LOGICO \n"); yylval.simbolo = yyleng; return OP_LOGIC;}
 {VAR_NAME}          { printf("VARIABLE \n");strcpy(yylval.cadena, yytext); return VAR_NAME;}
-{VAR_TYPE}			{ printf("TIPODEVARIABLE \n");strcpy(yylval.cadena, yytext); return VAR_TYPE}
+{VAR_TYPE}			{ printf("TIPODEVARIABLE \n");strcpy(yylval.cadena, yytext); return VAR_TYPE;}
 
 [ \t\n]+            { } /* ignorar enters y tabs*/
-.                   {printf("error lexico \n"),yylineno; exit(1);}
+
+. {printf("ERROR LEXICO EN LINEA %d \n",yylineno);} 
 
 %%
-int main (void) {
-	return yylex ();
-}
 
 
 	

@@ -27,8 +27,8 @@ int existe(char nombre[255]);
 /* Crea una tabla de signos y reserva espacio en memoria*/
 Tabla crear(){
 
-      int i=0;
-      for (i; i<50; i++){
+      int i;
+      for (i = 0; i<50; i++){
         
         tablaDeSimbolos.variables[i] = NULL;  
       
@@ -42,14 +42,14 @@ int insertar(char nombre[255],char tipo){
 
      if (existe(nombre)==0){
      
-                            
+             int i;               
              Variable * temp;
              temp = malloc(sizeof(Variable));
              strcpy(temp->nombre,nombre);
              temp->tipo = tipo;
 
-             int i = 0;
-             for (i; i<50; i++){
+             
+             for (i = 0; i<50; i++){
          
              if (tablaDeSimbolos.variables[i] == NULL){       
                                                      
@@ -81,9 +81,9 @@ char getTipo(char nombre[255]){
      
      if (existe(nombre)==1){
       
-        int i=0; 
+        int i; 
         
-        for (i; i<50; i++){
+        for (i = 0; i<50; i++){
             
            if (tablaDeSimbolos.variables[i]!=NULL && strcmp(tablaDeSimbolos.variables[i]->nombre, nombre)==0){
 
@@ -100,9 +100,9 @@ char getTipo(char nombre[255]){
 
 int existe(char nombre[255]){
 
-       int i=0;
+       int i;
       
-       for (i; i<50; i++){
+       for (i = 0; i<50; i++){
          
          if (tablaDeSimbolos.variables[i]!=NULL){
              
@@ -134,8 +134,8 @@ void test(){
      insertar("pruebaBoolean",'b');
      printf("Variables insertadas con exito! \n");    
      printf("Validando valores insertados... \n");
-     int i=0;
-     for (i;i<10;i++){
+     int i;
+     for (i = 0;i<10;i++){
       
          if (tablaDeSimbolos.variables[i]!=NULL){
             printf("Tabla de simbolos en posicion %d | %s | %c \n",i,tablaDeSimbolos.variables[i]->nombre, getTipo(tablaDeSimbolos.variables[i]->nombre));
@@ -146,10 +146,3 @@ void test(){
      
 }
 
-main(){
-
-    //test();
-    //system("PAUSE");
-    return 0;
-       
-}
