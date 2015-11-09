@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <tabla_simbolos.c>
+#include "tabla_simbolos.c"
 
 int yylex(); 
-int yyerror(const char *p) { printf("error");}
+void yyerror() { printf("error");}
 %}
 
 %union {
