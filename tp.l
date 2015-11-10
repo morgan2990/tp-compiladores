@@ -42,7 +42,6 @@ VAR_TYPE [A-Z][a-zA-Z0-9]*
 {STRING}		    { printf("STRING \n");strcpy(yylval.cadena, yytext); return STRING;}
 {DIGIT}            	{ printf("DIGIT \n"); yylval.numero=atoi(yytext); return DIGIT;}
 {INTEGER}           { printf("INTEGER \n"); yylval.numero=atoi(yytext); return INTEGER;}
-{OP_LOGIC}       	{ printf("OPERADOR LOGICO \n"); yylval.simbolo = yyleng; return OP_LOGIC;}
 {VAR_NAME}          { printf("VARIABLE \n");strcpy(yylval.cadena, yytext); return VAR_NAME;}
 {VAR_TYPE}			{ printf("TIPODEVARIABLE \n");strcpy(yylval.cadena, yytext); return VAR_TYPE;}
 
@@ -51,6 +50,7 @@ VAR_TYPE [A-Z][a-zA-Z0-9]*
 . {printf("ERROR LEXICO EN LINEA %d \n",yylineno);} 
 
 %%
+
 
 
 	
