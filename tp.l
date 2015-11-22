@@ -8,9 +8,7 @@
 %}
 
 OP_SUMA "+"
-OP_RESTA"-"
 OP_PROD "*"
-OP_DIV "/"
 OP_LOGIC "!"|"&&"|"||"|">"|"<"|"=="|"<="|">="
 DIGIT    -?[0-9]
 INTEGER	 -?[0-9]{2,}
@@ -35,10 +33,8 @@ VAR_TYPE [A-Z][a-zA-Z0-9]*
 "="					{ printf("ASIGNACION \n"); return ASIGNACION;}
 ";"					{ printf("FINDELINEA \n"); return FIN_LINEA;}
 {OP_SUMA}          	{ printf("SUMA \n"); return OP_SUMA;}
-{OP_RESTA}          { printf("RESTA \n"); return OP_RESTA;}
 {OP_PROD}          	{ printf("MULTIPLICACION \n"); return OP_PROD;}
-{OP_DIV}			{ printf("DIVISION \n"); return OP_DIV;}
-{BOOLEAN}           { printf("BOOLEANO \n"); yylval.simbolo = yyleng; return BOOLEAN;}
+{BOOLEAN}           { printf("BOOLEANO \n"); yylval.numero = atoi(yytext); return BOOLEAN;}
 {STRING}		    { printf("STRING \n");strcpy(yylval.cadena, yytext); return STRING;}
 {DIGIT}            	{ printf("DIGIT \n"); yylval.numero=atoi(yytext); return DIGIT;}
 {INTEGER}           { printf("INTEGER \n"); yylval.numero=atoi(yytext); return INTEGER;}
