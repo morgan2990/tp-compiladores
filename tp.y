@@ -58,7 +58,11 @@ char validarTipo(char tipo1, char operador, char tipo2){
   if (tipo1 == tipo2) {
 
     
+<<<<<<< HEAD
       if (operador == '+' || operador == '*') { /*En esta linea tiraba warning en OP_SUM y OP_PROD, lo reemplazé por  + y * */
+=======
+      if (operador == OP_SUMA || operador == OP_PROD) {
+>>>>>>> origin/master
         if (tipo2 == 'i') {
           return 'i';
         }
