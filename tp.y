@@ -5,9 +5,9 @@
 #include "tabla_simbolos.c"
 
 int yylex(); 
-void yyerror(const char *p) { printf("%s \n", p);}/*En esta linea modifiqué los parametros de yyerror, ademas cambié el tipo de retorno de int a void*/
-char validarTipo(char tipo1, char operador, char tipo2); /*Declaré la función*/
-void agregarATablaDeSimbolos(char varType[255], char varName[255]); /*Declaré la función*/
+void yyerror(const char *p) { printf("%s \n", p);}
+char validarTipo(char tipo1, char operador, char tipo2); 
+void agregarATablaDeSimbolos(char varType[255], char varName[255]);
 %}
 
 %union {
@@ -58,7 +58,7 @@ char validarTipo(char tipo1, char operador, char tipo2){
   if (tipo1 == tipo2) {
 
     
-      if (operador == '+' || operador == '*') { /*En esta linea tiraba warning en OP_SUM y OP_PROD, lo reemplazé por  + y * */
+      if (operador == '+' || operador == '*') { /*cambio de operadores*/
       
 
         if (tipo2 == 'i') {
@@ -90,7 +90,7 @@ void agregarATablaDeSimbolos(char varType[255], char varName[255]){
   } else if (strcmp (varType, "String")){
     insertar (varName, 's');
   } else {
-    yyerror("Error al completar la tabla de simbolos"); /*En esta linea modifiqué los parametros de yyerror*/
+    yyerror("Error al completar la tabla de simbolos");
   }
 };
 
