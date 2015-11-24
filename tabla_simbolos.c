@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 typedef struct variable {
@@ -8,6 +9,7 @@ typedef struct variable {
 
 typedef struct tabla {
   Variable * variables[50];
+  int size;
 } Tabla;
 
 /*https://en.wikipedia.org/wiki/C_dynamic_memory_allocation*/
@@ -33,6 +35,7 @@ Tabla crear(){
         tablaDeSimbolos.variables[i] = NULL;  
       
       }
+      tablaDeSimbolos.size=0;
 
       return tablaDeSimbolos;
      
@@ -54,6 +57,7 @@ int insertar(char nombre[255],char tipo){
              if (tablaDeSimbolos.variables[i] == NULL){       
                                                      
                  tablaDeSimbolos.variables[i] = temp;
+                 tablaDeSimbolos.size=tablaDeSimbolos.size+1;
                  return 1;
 
              }
@@ -61,6 +65,7 @@ int insertar(char nombre[255],char tipo){
          }                                           
                                                  
      }
+    
      
      return 0;
 
@@ -119,6 +124,14 @@ int existe(char nombre[255]){
         
 }
 
+void imprimirTabla(){
+  int i;
+  for (i=0; i<tablaDeSimbolos.size; i++){
+    printf ("%s\n", tablaDeSimbolos.variables[i]->nombre);
+    printf ("%c\n", getTipo(tablaDeSimbolos.variables[i]->nombre));
+  }
+}
+
 void test(){
 
      printf("Creando tabla... \n");
@@ -142,7 +155,15 @@ void test(){
             }
      }
      printf("Test concluido! \n");
+
+
+     imprimirTabla();
      
      
 }
+
+/*int main (){
+  test ();
+  return 0;
+}*/
 

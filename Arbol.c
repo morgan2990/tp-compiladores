@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 typedef struct Nodo {
@@ -8,6 +9,7 @@ typedef struct Nodo {
 	struct Nodo *derecho;
 } Nodo;
 
+Nodo *crearNodo();
 Nodo *agregarNodo(Nodo *arbol, char clave [255]);
 Nodo *agregarNodoIzquierdo(Nodo *arbol, char clave [255]);
 Nodo *agregarNodoDerecho(Nodo *arbol, char clave [255]);
@@ -18,7 +20,7 @@ void imprimirInOrden(Nodo *arbol);
 //TODO agregar verificaciones por NULL
 
 
-int main(int argc, char **argv) {
+/*int main(int argc, char **argv) {
 
 	Nodo *arbol = NULL;
 	arbol = agregarNodo(arbol, "Programa");
@@ -40,10 +42,11 @@ int main(int argc, char **argv) {
 	imprimirInOrden(arbol);
 
 	
-}
+}*/
 
 Nodo *agregarNodo(Nodo *arbol, char clave [255]) {
-	Nodo *nuevoNodo = malloc(sizeof(Nodo));
+	Nodo * nuevoNodo;
+	nuevoNodo = malloc(sizeof(Nodo));
 	strcpy(nuevoNodo->clave, clave);
 	nuevoNodo->izquierdo = NULL;
 	nuevoNodo->derecho = NULL;
@@ -55,7 +58,8 @@ Nodo *agregarNodo(Nodo *arbol, char clave [255]) {
 }
 
 Nodo *agregarNodoIzquierdo(Nodo *arbol, char clave [255]) {
-	Nodo *nuevoNodo = malloc(sizeof(Nodo));
+	Nodo * nuevoNodo;
+	nuevoNodo = malloc(sizeof(Nodo));
 	strcpy(nuevoNodo->clave, clave);
 	nuevoNodo->izquierdo = NULL;
 	nuevoNodo->derecho = NULL;
@@ -66,7 +70,8 @@ Nodo *agregarNodoIzquierdo(Nodo *arbol, char clave [255]) {
 }
 
 Nodo *agregarNodoDerecho(Nodo *arbol, char clave [255]) {
-	Nodo *nuevoNodo = malloc(sizeof(Nodo));
+	Nodo * nuevoNodo;
+	nuevoNodo = malloc(sizeof(Nodo));
 	strcpy(nuevoNodo->clave, clave);
 	nuevoNodo->izquierdo = NULL;
 	nuevoNodo->derecho = NULL;
@@ -104,6 +109,12 @@ Nodo *buscarNodo(Nodo *arbol, char clave[255]) {
 		buscarNodo (arbol->izquierdo, clave);
 		buscarNodo (arbol->derecho, clave);
 	}
+}
+
+Nodo *crearNodo (){
+	Nodo *temp;
+	temp = malloc(sizeof(Nodo));
+	return temp;
 }
 
 

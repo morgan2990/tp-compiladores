@@ -2,12 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "Arbol.c"
 #include "tabla_simbolos.c"
 
 int yylex(); 
 void yyerror(const char *p) { printf("%s \n", p);}
 char validarTipo(char tipo1, char operador, char tipo2); 
 void agregarATablaDeSimbolos(char varType[255], char varName[255]);
+Nodo *agregarAArbolSintactico(char token1[255], char token2[255], char token3[255]);
 %}
 
 %union {
@@ -21,7 +23,7 @@ void agregarATablaDeSimbolos(char varType[255], char varName[255]);
 
 %token <simbolo> PA PC LLA LLC ASIGNACION /*OP_LOGIC*/ OP_SUMA OP_RESTA OP_PROD OP_DIV FIN_LINEA CICLO CONDICION SINO START END
 %token <cadena> STRING VAR_NAME VAR_TYPE
-%token <numero> BOOLEAN DIGIT INTEGER
+%token <numero> BOOLEAN INTEGER
 
 %type <numero> termino factor operacion
 %type <bloqueCodigo> asignacion
@@ -56,7 +58,7 @@ factor: INTEGER {$$ = 'i';}| PA operacion PC { $$ = $2;}
 
 char validarTipo(char tipo1, char operador, char tipo2){
   if (tipo1 == tipo2) {
-
+    printf ("%c,%c,%c", tipo1, operador, tipo2);
     
       if (operador == '+' || operador == '*') { /*cambio de operadores*/
       
@@ -94,9 +96,19 @@ void agregarATablaDeSimbolos(char varType[255], char varName[255]){
   }
 };
 
+Nodo *agregarAArbolSintactico(char token1[255], char token2[255], char token3[255]){
+  Nodo *arbol;
+  arbol = crearNodo();
+  arbol = agregarNodo(arbol, token2);
+  arbol = agregarNodoIzquierdo (arbol, token1);
+  arbol = agregarNodoDerecho (arbol, token3);
+  return arbol;
+}
+
 int main (){
-  
+
   yyparse ();
+  imprimirTabla();
   return 0;
 
 }
