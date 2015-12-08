@@ -127,8 +127,10 @@ int existe(char nombre[255]){
 void imprimirTabla(){
   int i;
   for (i=0; i<tablaDeSimbolos.size; i++){
-    printf ("%s\n", tablaDeSimbolos.variables[i]->nombre);
-    printf ("%c\n", getTipo(tablaDeSimbolos.variables[i]->nombre));
+    printf("\nImprimiendo tabla de simbolos... \n");
+    printf ("Nombre de variable: %s\n", tablaDeSimbolos.variables[i]->nombre);
+    printf ("Tipo de variable: %c\n", getTipo(tablaDeSimbolos.variables[i]->nombre));
+    
   }
 }
 
@@ -162,8 +164,4 @@ void test(){
      
 }
 
-/*int main (){
-  test ();
-  return 0;
-}*/
 

@@ -84,13 +84,14 @@ char validarTipo(char tipo1, char operador, char tipo2){
 };
 
 void agregarATablaDeSimbolos(char varType[255], char varName[255]){
+
   if
-   (strcmp(varType, "Boolean")){
-    insertar (varName, 'b');
-  } else if ( strcmp(varType, "Integer")){
-    insertar (varName, 'i');
-  } else if (strcmp (varType, "String")){
+   (strcmp(varType, "String") == 0){
     insertar (varName, 's');
+  } else if ( strcmp(varType, "Integer") == 0){
+    insertar (varName, 'i');
+  } else if (strcmp (varType, "Bolean") == 0){
+    insertar (varName, 'b');
   } else {
     yyerror("Error al completar la tabla de simbolos");
   }
@@ -104,6 +105,7 @@ Nodo *agregarAArbolSintactico(char token1[255], char token2[255], char token3[25
   arbol = agregarNodoDerecho (arbol, token3);
   return arbol;
 }
+
 
 int main (){
 
